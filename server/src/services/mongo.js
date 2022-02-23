@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const MONGO_URL = "mongodb+srv://nasa-api:abcdefgh159753@nasacluster.jn6b6.mongodb.net/nasaDB?retryWrites=true&w=majority"
+const MONGO_URL = process.env.MONGO_URL ;
 
 
 mongoose.connection.once("open", ()=>{                    //this mongoose.connection is an event emmiter that emit an event ('open') when the connection is ready or errors
