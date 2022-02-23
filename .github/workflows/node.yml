@@ -1,25 +1,17 @@
 name: NASA Project CI
 on:
   push:
-    branches: [master]
-  pull_request: 
-    branches: [master]
-jobs: 
-  # build: 
-  # deploy:      //build and deploy will  run through build and deploy in parallele
-
-# here the deploy depends on build, wait until build end then run deploy
-  # build: 
-  # deploy: 
-  #   needs: build 
-    
-  build: 
-    runs-on: Ubuntu-latest  #or windows-latest #the os and platform will building our prjt on 
-    steps:   #steps and actions that are going to be taken by ubuntu while building , steps = scripts
-      -uses: actions/checkout@v2   #premade actions from github or third parties
-      # -name: Use Node.js version 16
-      #  uses: actions/setup-node@v2 #setup node premade action
-      #  with: #specific version of node
-      #   node-version: "16"
-      -run: npm install  #run our own command. to install our dependencies. here will run this scripts : "install": "npm run install-server && npm run install-client",
-      -run: npm run build --prefix client
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js version 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run: npm install
+      - run: npm run build --prefix client
