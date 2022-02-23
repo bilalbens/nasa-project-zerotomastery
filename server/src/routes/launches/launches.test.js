@@ -3,6 +3,7 @@
 const request = require("supertest");
 const app = require("../../app")
 const {  mongoConnect, mongoDisconnect} = require("../../services/mongo")
+const { loadPlanetsData } = require("../../models//planets.model")
 
 
 
@@ -10,6 +11,8 @@ describe("Laucnhes API", ()=>{
 
     beforeAll( async ()=>{             //before all statements , executed before all tests
             await mongoConnect()
+            await loadPlanetsData();
+
     });
 
     afterAll(async ()=>{             //after all statements , executed after all tests
