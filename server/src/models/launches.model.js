@@ -31,13 +31,6 @@ const getLatestFlightNumber =  async ()=>{
 
 
 const saveLaunch = async (launch)=>{
-    const planet = await planets.findOne({
-        keplerName: launch.target,
-    })
-
-    if(!planet){
-        throw new Error('no matching planet found')
-    }
     await launchesDB.findOneAndUpdate({
         flightNumber: launch.flightNumber,
     },launch, {upsert:true})
@@ -64,6 +57,14 @@ const existLaunchedWithId = async (launchId)=>{
 
 
 const   schedulewLaunch = async (launch)=>{
+    const planet = await planets.findOne({
+        keplerName: launch.target,
+    })
+
+    if(!planet){
+        throw new Error('no matching planet found')
+    }
+
     const newFlightNumber = await getLatestFlightNumber() + 1;
     const newLaunch = Object.assign(launch,{
             success:true,
